@@ -2,6 +2,7 @@
     --bg: rgb(25, 23, 36);
     --text: rgb(224, 222, 244);
     --highlight: rgb(31, 29, 45);
+    --accent: rgb(156, 207, 216);
     --progress-size: 3.5rem;
 }
 
@@ -18,4 +19,13 @@ html {
 body {
     margin: 0;
     padding: 0;
+}
+
+a {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
 }

@@ -1,7 +1,9 @@
 <div id="details">
 {#if details}
+    <img style="display: none;" src="" alt="">
     <button id="x" on:click={onDestroy}>X</button>
     <h1>{details.title}</h1>
+    <div id="content">{@html content}</div>
 {:else}
     <Spinner />
 {/if}
@@ -16,9 +18,31 @@
     export let onDestroy: () => void;
 
     let details: any = null;
+    let content: string;
 
     const fetchDetails = async () => {
         details = await fetchJson(url);
+        content = generateContentHtml(details.content);
+    }
+
+    const generateContentHtml = (content: any) => {
+        let html: string[] = [];
+        for (var i = 0; i < content.length; i++) {
+            const part = content[i];
+            if (part.type == "text" || part.type == "headline") {
+                html.push(part.value);
+            } else if (part.type == "box" && part.box.images != undefined) {
+                const box = part.box;
+                console.log("has img");
+                html.push(
+                    `
+                    <img src="${box.images.videowebl.imageurl ?? ''}" alt="${box.images.alttext ?? ''}" style="margin: 2rem 0; border-radius: 1rem;">
+                    <figcaption>${box.title ?? ""}</figcaption>
+                    `
+                )
+            }
+        }
+        return html.join("");
     }
 
     onMount(() => {
@@ -27,6 +51,10 @@
 </script>
 
 <style>
+    h1 {
+        margin-top: 3rem;
+    }
+
     #details {
         position: fixed;
         height: 100vh;
@@ -54,5 +82,17 @@
         top: 0;
         margin: 2rem;
         cursor: pointer;
+    }
+
+    #content {
+        margin: 0 auto;
+        width: 80%;
+        padding: 2rem;
+        text-align: center;
+        overflow-y: scroll;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 </style>
