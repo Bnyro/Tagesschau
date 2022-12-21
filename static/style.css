@@ -1,0 +1,21 @@
+:root {
+    --bg: rgb(25, 23, 36);
+    --text: rgb(224, 222, 244);
+    --highlight: rgb(31, 29, 45);
+    --progress-size: 3.5rem;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-family: 'Courier New', Courier, monospace;
+    background-color: var(--bg);
+    color: var(--text);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
