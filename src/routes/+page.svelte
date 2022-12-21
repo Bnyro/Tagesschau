@@ -25,14 +25,33 @@
     import Details from "../components/Details.svelte";
 
     let news: any[] = [];
+    let nextPage: string | null = null;
 
     const fetchNews = async () => {
         const response = await fetchJson("https://www.tagesschau.de/api2/news/");
         news = response.news.filter((article: any) => article.type == "story");
+        nextPage = response.nextPage;
+    }
+
+    const fetchNextPage = async () => {
+        if (!nextPage) return;
+        const response = await fetchJson(nextPage);
+        const newNews = response.news.filter((article: any) => article.type == "story");
+        news = news.concat(newNews);
+        nextPage = response.nextPage;
+    }
+
+    const createScrollListener = () => {
+        document.addEventListener("scroll", () => {
+            if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+                fetchNextPage();
+            }
+        })
     }
 
     onMount(() => {
         fetchNews();
+        createScrollListener();
     })
 </script>
 
