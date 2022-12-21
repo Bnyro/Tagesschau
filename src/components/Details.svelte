@@ -89,6 +89,11 @@
         top: 0;
         margin: 2rem;
         cursor: pointer;
+        transition: all ease-in-out 0.2s;
+    }
+
+    #x:hover {
+        opacity: 0.7;
     }
 
     #content {
