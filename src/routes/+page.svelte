@@ -1,5 +1,5 @@
 <svelte:head>
-    <title>Homepage</title>
+    <title>News - Tagesschau</title>
 </svelte:head>
 
 <section id="news">
