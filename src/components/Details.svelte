@@ -40,6 +40,14 @@
                     <figcaption>${box.title ?? ""}</figcaption>
                     `
                 )
+            } else if (part.type == "video") {
+                html.push(
+                    `
+                    <video controls style="margin: 2rem 0; border-radius: 1rem;">
+                        <source src="${part.video.streams.h264m}">    
+                    </video>
+                    `
+                )
             }
         }
         return html.join("");
