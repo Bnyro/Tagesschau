@@ -33,7 +33,6 @@
                 html.push(part.value);
             } else if (part.type == "box" && part.box.images != undefined) {
                 const box = part.box;
-                console.log("has img");
                 html.push(
                     `
                     <img src="${box.images.videowebl.imageurl ?? ''}" alt="${box.images.alttext ?? ''}" style="margin: 2rem 0; border-radius: 1rem;">
@@ -44,7 +43,7 @@
                 html.push(
                     `
                     <video controls style="margin: 2rem 0; border-radius: 1rem;">
-                        <source src="${part.video.streams.h264m}">    
+                        <source src="${part.video.streams.h264m ?? part.video.streams.h264xl}">    
                     </video>
                     `
                 )
