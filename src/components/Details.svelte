@@ -70,13 +70,17 @@
     }
 
     article {
-        margin: 0 auto;
-        width: 80%;
-        padding: 2rem;
+        padding: 2rem 10vw;
         text-align: center;
         overflow-y: scroll;
         display: flex;
         flex-direction: column;
         align-items: center;
+    }
+
+    @media only screen and (max-width: 800px) {
+        article {
+            padding: 2rem 1rem;
+        }
     }
 </style>

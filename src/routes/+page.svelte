@@ -109,4 +109,19 @@
     .date {
         opacity: 0.5;
     }
+
+    @media only screen and (max-width: 800px) {
+        #news article {
+            width: 90%;
+            flex-direction: column;
+        }
+
+        .topline {
+            display: none;
+        }
+
+        article div {
+            padding-top: 1.5rem;
+        }
+    }
 </style>
