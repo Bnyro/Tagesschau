@@ -48,6 +48,7 @@
         justify-content: center;
         align-items: center;
         background: var(--bg);
+        z-index: 100;
     }
 
     #x {

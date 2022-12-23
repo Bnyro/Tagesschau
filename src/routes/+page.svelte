@@ -8,7 +8,10 @@
         <article on:click={() => article.isFocussed = true}>
             <img src={article.teaserImage?.klein1x1?.imageurl} alt={article.title}>
             <div>
-                <h6>{article.topline ?? ""}</h6>
+                <span class="topline">
+                    <h6>{article.topline ?? ""}</h6>
+                    <span class="date">{formatDate(article.date)}</span>
+                </span>
                 <h3>{article.title}</h3>
                 <p>{article.firstSentence ?? ""}</p>
             </div>
@@ -23,6 +26,7 @@
 	import fetchJson from "../lib/fetch";
 	import { onMount } from "svelte";
     import Details from "../components/Details.svelte";
+	import formatDate from "$lib/format";
 
     let news: any[] = [];
     let nextPage: string | null = null;
@@ -85,9 +89,24 @@
     #news article div {
         display: flex;
         flex-direction: column;
+        flex-grow: 1;
     }
 
     #news article div * {
-        margin: 0.5rem 0;
+        margin: 0.1rem 0;
+    }
+
+    #news article div p {
+        margin-top: 0.5rem;
+    }
+
+    .topline {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .date {
+        opacity: 0.5;
     }
 </style>
