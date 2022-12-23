@@ -20,6 +20,12 @@ export default function generateContentHtml(content: any) {
                 </video>
                 `
             )
+        } else if (part.type == "htmlEmbed") {
+            html.push(
+                `
+                <embed src="${part.htmlEmbed.url}" style="width: min(90%, 50rem); height: 30rem; border-radius: 1rem;">
+                `
+            )
         }
     }
     return html.join("");
