@@ -1,31 +1,31 @@
 :root {
-    --bg: rgb(25, 23, 36);
-    --text: rgb(224, 222, 244);
-    --highlight: rgb(31, 29, 45);
-    --accent: rgb(156, 207, 216);
-    --progress-size: 3.5rem;
+	--bg: rgb(25, 23, 36);
+	--text: rgb(224, 222, 244);
+	--highlight: rgb(31, 29, 45);
+	--accent: rgb(156, 207, 216);
+	--progress-size: 3.5rem;
 }
 
 * {
-    box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 html {
-    font-family: 'Courier New', Courier, monospace;
-    background-color: var(--bg);
-    color: var(--text);
+	font-family: 'Courier New', Courier, monospace;
+	background-color: var(--bg);
+	color: var(--text);
 }
 
 body {
-    margin: 0;
-    padding: 0;
+	margin: 0;
+	padding: 1rem 0;
 }
 
 a {
-    color: var(--accent);
-    text-decoration: none;
+	color: var(--accent);
+	text-decoration: none;
 }
 
 a:hover {
-    text-decoration: underline;
+	text-decoration: underline;
 }
