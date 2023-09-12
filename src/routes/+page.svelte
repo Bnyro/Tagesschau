@@ -8,7 +8,7 @@
 	let nextPage: string | null = null;
 
 	const fetchNews = async () => {
-		const response = await fetchJson('https://www.tagesschau.de/api2u/news/');
+		const response = await fetchJson('https://www.tagesschau.de/api2u/news');
 		news = response.news.filter((article: any) => article.type == 'story');
 		nextPage = response.nextPage;
 	};
@@ -43,7 +43,7 @@
 	{#each news as article}
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
 		<article on:click={() => (article.isFocussed = true)}>
-			<img src={article.teaserImage?.klein1x1?.imageurl} alt={article.title} />
+			<img src={article.teaserImage?.imageVariants['1x1-144']} alt={article.title} />
 			<div>
 				<span class="topline">
 					<h6>{article.topline ?? ''}</h6>
