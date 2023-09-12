@@ -23,7 +23,7 @@
 <div id="details">
 	{#if details}
 		<img style="display: none;" src="" alt="" />
-		<button id="x" on:click={onDestroy}>X</button>
+		<button id="destroy" on:click={onDestroy}>X</button>
 		<article>
 			<h1>{details.title}</h1>
 			<div id="content">{@html content}</div>
@@ -51,7 +51,7 @@
 		z-index: 100;
 	}
 
-	#x {
+	#destroy {
 		border-radius: 50%;
 		background: var(--highlight);
 		color: var(--text);
@@ -76,6 +76,15 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+	}
+
+	:global(article img),
+	:global(article video),
+	:global(article embed) {
+		border-radius: 1rem;
+		max-width: 90%;
+		height: auto;
+		margin: 1rem 2rem;
 	}
 
 	@media only screen and (max-width: 800px) {

@@ -9,24 +9,20 @@ export default function generateContentHtml(content: any) {
 				`
                 <img src="${part.box.images.videowebl.imageurl ?? ''}" alt="${
 					part.box.images.alttext ?? ''
-				}" style="margin: 2rem 0; border-radius: 1rem; max-width: 90%;">
+				}">
                 <figcaption>${part.box.title ?? ''}</figcaption>
                 `
 			);
 		} else if (part.type == 'video') {
 			html.push(
 				`
-                <video controls style="margin: 2rem 0; border-radius: 1rem;">
+                <video controls>
                     <source src="${part.video.streams.h264m ?? part.video.streams.h264xl}">    
                 </video>
                 `
 			);
 		} else if (part.type == 'htmlEmbed') {
-			html.push(
-				`
-                <embed src="${part.htmlEmbed.url}" style="width: min(90%, 50rem); height: 30rem; border-radius: 1rem;">
-                `
-			);
+			html.push(`<embed src="${part.htmlEmbed.url}">`);
 		}
 	}
 	return html.join('');
