@@ -46,7 +46,6 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
-		align-items: center;
 		background: var(--bg);
 		z-index: 100;
 	}
@@ -65,26 +64,24 @@
 		transition: all ease-in-out 0.2s;
 	}
 
-	#x:hover {
+	#destroy:hover {
 		opacity: 0.7;
 	}
 
 	article {
-		padding: 2rem 10vw;
-		text-align: center;
+		padding: 2rem calc(10vw + 2rem);
 		overflow-y: scroll;
 		display: flex;
 		flex-direction: column;
-		align-items: center;
 	}
 
 	:global(article img),
 	:global(article video),
 	:global(article embed) {
 		border-radius: 1rem;
-		max-width: 90%;
+		max-width: 95%;
 		height: auto;
-		margin: 1rem 2rem;
+		margin: 1rem 0;
 	}
 
 	@media only screen and (max-width: 800px) {
