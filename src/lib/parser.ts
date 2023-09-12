@@ -1,6 +1,6 @@
 export default function generateContentHtml(content: any) {
-	let html: string[] = [];
-	for (var i = 0; i < content.length; i++) {
+	const html: string[] = [];
+	for (let i = 0; i < content.length; i++) {
 		const part = content[i];
 		if (part.type == 'text' || part.type == 'headline') {
 			html.push(part.value);
