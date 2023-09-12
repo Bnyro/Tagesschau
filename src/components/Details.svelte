@@ -11,7 +11,7 @@
 	let content: string;
 
 	const fetchDetails = async () => {
-		details = await fetchJson(url);
+		// details = await fetchJson(url);
 		content = generateContentHtml(details.content);
 	};
 
@@ -29,7 +29,9 @@
 			<div id="content">{@html content}</div>
 		</article>
 	{:else}
-		<Spinner />
+		<div id="spinner-container">
+			<Spinner />
+		</div>
 	{/if}
 </div>
 
@@ -82,6 +84,14 @@
 		max-width: 95%;
 		height: auto;
 		margin: 1rem 0;
+	}
+
+	#spinner-container {
+		height: 100%;
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
 	}
 
 	@media only screen and (max-width: 800px) {
