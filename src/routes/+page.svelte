@@ -3,6 +3,7 @@
 	import { onMount } from 'svelte';
 	import Details from '../components/Details.svelte';
 	import formatDate from '$lib/format';
+	import MediaQuery from '../components/MediaQuery.svelte';
 
 	let news: any[] = [];
 	let nextPage: string | null = null;
@@ -43,7 +44,19 @@
 	{#each news as article}
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
 		<article on:click={() => (article.isFocussed = true)}>
-			<img src={article.teaserImage?.imageVariants['1x1-144']} alt={article.title} />
+			<MediaQuery query="only screen and (max-width: 800px)" let:matches>
+				{#if matches}
+					<img
+						src={article.teaserImage?.imageVariants['16x9-640']}
+						alt={article.teaserImage?.alttext}
+					/>
+				{:else}
+					<img
+						src={article.teaserImage?.imageVariants['1x1-144']}
+						alt={article.teaserImage?.alttext}
+					/>
+				{/if}
+			</MediaQuery>
 			<div>
 				<span class="topline">
 					<h6>{article.topline ?? ''}</h6>
@@ -116,11 +129,16 @@
 			flex-direction: column;
 		}
 
-		.topline {
+		#news article .topline {
 			display: none;
 		}
 
-		article div {
+		#news article img {
+			max-width: 100%;
+			height: auto;
+		}
+
+		#news article div {
 			padding-top: 1.5rem;
 		}
 	}
