@@ -11,7 +11,7 @@
 	let content: string;
 
 	const fetchDetails = async () => {
-		// details = await fetchJson(url);
+		details = await fetchJson(url);
 		content = generateContentHtml(details.content);
 	};
 
