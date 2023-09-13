@@ -20,7 +20,7 @@
 	</MediaQuery>
 	<div>
 		<span class="topline">
-			<h6>{article.topline ?? ''}</h6>
+			<h5>{article.topline ?? ''}</h5>
 			<span class="date">{formatDate(article.date)}</span>
 		</span>
 		<h3>{article.title}</h3>
@@ -33,8 +33,8 @@
 
 <style>
 	article {
-		margin: 0.5rem auto;
-		width: 70%;
+		margin: 0.5rem 0;
+		width: 100%;
 		border-radius: 1.2rem;
 		padding: 1rem 2rem;
 		cursor: pointer;

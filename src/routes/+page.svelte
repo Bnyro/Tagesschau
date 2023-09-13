@@ -4,11 +4,23 @@
 	import Article from '../components/Article.svelte';
 
 	let news: any[] = [];
+	let homepage: any[] = [];
+	let regional: any[] = [];
 	let nextPage: string | null = null;
+
+	const filterArticles = (articles: any[]) => {
+		return articles.filter((article) => article.type == 'story');
+	};
+
+	const fetchHomePage = async () => {
+		const response = await fetchJson('https://www.tagesschau.de/api2u/homepage');
+		homepage = filterArticles(response.news);
+		regional = filterArticles(response.regional);
+	};
 
 	const fetchNews = async () => {
 		const response = await fetchJson('https://www.tagesschau.de/api2u/news');
-		news = response.news.filter((article: any) => article.type == 'story');
+		news = filterArticles(response.news);
 		nextPage = response.nextPage;
 	};
 
@@ -28,7 +40,8 @@
 		});
 	};
 
-	onMount(() => {
+	onMount(async () => {
+		await fetchHomePage();
 		fetchNews();
 		createScrollListener();
 	});
@@ -39,6 +52,15 @@
 </svelte:head>
 
 <section id="news">
+	<h1>Homepage</h1>
+	{#each homepage as article}
+		<Article {article} />
+	{/each}
+	<h1>Regional</h1>
+	{#each regional as article}
+		<Article {article} />
+	{/each}
+	<h1>News</h1>
 	{#each news as article}
 		<Article {article} />
 	{/each}
@@ -48,8 +70,13 @@
 	#news {
 		display: flex;
 		flex-direction: column;
-		align-items: center;
 		width: 100vw;
-		max-width: 100%;
+		max-width: 70%;
+		margin: 0 auto;
+	}
+
+	h1 {
+		margin-top: 3rem;
+		margin-left: 0.5rem;
 	}
 </style>
