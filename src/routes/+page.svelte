@@ -2,6 +2,7 @@
 	import fetchJson from '../lib/fetch';
 	import { onMount } from 'svelte';
 	import Article from '../components/Article.svelte';
+	import { page } from '$app/stores';
 
 	let news: any[] = [];
 	let homepage: any[] = [];
@@ -18,8 +19,11 @@
 		regional = filterArticles(response.regional);
 	};
 
-	const fetchNews = async () => {
-		const response = await fetchJson('https://www.tagesschau.de/api2u/news');
+	const fetchNews = async (regions: string | null, ressort: string | null) => {
+		let params: any = {};
+		if (regions) params['regions'] = regions;
+		if (ressort) params['ressort'] = ressort;
+		const response = await fetchJson('https://www.tagesschau.de/api2u/news', params);
 		news = filterArticles(response.news);
 		nextPage = response.nextPage;
 	};
@@ -41,8 +45,10 @@
 	};
 
 	onMount(async () => {
-		await fetchHomePage();
-		fetchNews();
+		const regions = $page.url.searchParams.get('regions');
+		const ressort = $page.url.searchParams.get('ressort');
+		if (!regions && !ressort) await fetchHomePage();
+		fetchNews(regions, ressort);
 		createScrollListener();
 	});
 </script>
@@ -52,14 +58,18 @@
 </svelte:head>
 
 <section id="news">
-	<h1>Homepage</h1>
-	{#each homepage as article}
-		<Article {article} />
-	{/each}
-	<h1>Regional</h1>
-	{#each regional as article}
-		<Article {article} />
-	{/each}
+	{#if homepage.length}
+		<h1>Homepage</h1>
+		{#each homepage as article}
+			<Article {article} />
+		{/each}
+	{/if}
+	{#if regional.length}
+		<h1>Regional</h1>
+		{#each regional as article}
+			<Article {article} />
+		{/each}
+	{/if}
 	<h1>News</h1>
 	{#each news as article}
 		<Article {article} />
