@@ -1,38 +1,24 @@
 <script lang="ts">
-	import fetchJson from '../lib/fetch';
 	import { onMount } from 'svelte';
-	import Spinner from './Spinner.svelte';
 	import generateContentHtml from '$lib/parser';
 
-	export let url: string;
 	export let onDestroy: () => void;
+	export let details: any = null;
 
-	let details: any = null;
 	let content: string;
 
-	const fetchDetails = async () => {
-		details = await fetchJson(url);
-		content = generateContentHtml(details.content);
-	};
-
 	onMount(() => {
-		fetchDetails();
+		content = generateContentHtml(details.content);
 	});
 </script>
 
 <div id="details">
-	{#if details}
-		<img style="display: none;" src="" alt="" />
-		<button id="destroy" on:click={onDestroy}>X</button>
-		<article>
-			<h1>{details.title}</h1>
-			<div id="content">{@html content}</div>
-		</article>
-	{:else}
-		<div id="spinner-container">
-			<Spinner />
-		</div>
-	{/if}
+	<img style="display: none;" src="" alt="" />
+	<button id="destroy" on:click={onDestroy}>X</button>
+	<article>
+		<h1>{details.title}</h1>
+		<div id="content">{@html content}</div>
+	</article>
 </div>
 
 <style>
@@ -84,14 +70,6 @@
 		max-width: 95%;
 		height: auto;
 		margin: 1rem 0;
-	}
-
-	#spinner-container {
-		height: 100%;
-		width: 100%;
-		display: flex;
-		justify-content: center;
-		align-items: center;
 	}
 
 	@media only screen and (max-width: 800px) {

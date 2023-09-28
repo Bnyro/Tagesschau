@@ -1,13 +1,17 @@
 <script lang="ts">
 	import MediaQuery from '../components/MediaQuery.svelte';
-	import Details from '../components/Details.svelte';
 	import formatDate from '$lib/format';
+	import { goto } from '$app/navigation';
 
 	export let article: any;
+
+	const onArticleClick = () => {
+		goto(new URL(article.detailsweb).pathname);
+	};
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
-<article on:click={() => (article.isFocussed = true)}>
+<article on:click={onArticleClick}>
 	<MediaQuery query="only screen and (max-width: 800px)" let:matches>
 		{#if matches}
 			<img
@@ -27,9 +31,6 @@
 		<p>{article.firstSentence ?? ''}</p>
 	</div>
 </article>
-{#if article.isFocussed}
-	<Details url={article.details} onDestroy={() => (article.isFocussed = false)} />
-{/if}
 
 <style>
 	article {
