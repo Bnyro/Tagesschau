@@ -16,7 +16,11 @@
 	<img style="display: none;" src="" alt="" />
 	<button id="destroy" on:click={onDestroy}>X</button>
 	<article>
+		{#if details.teaserImage?.imageVariants}
+			<img src={details.teaserImage.imageVariants['16x9-1920']} alt={details.teaserImage.alttext} />
+		{/if}
 		<h1>{details.title}</h1>
+		<p id="date"><i>{new Date(details.date).toLocaleString()}</i></p>
 		<div id="content">{@html content}</div>
 	</article>
 </div>
@@ -63,13 +67,27 @@
 		flex-direction: column;
 	}
 
+	#date {
+		margin-top: 0.5rem;
+		margin-bottom: 2rem;
+	}
+
+	#content {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+
 	:global(article img),
 	:global(article video),
 	:global(article embed) {
 		border-radius: 1rem;
 		max-width: 95%;
+		width: 50rem;
+		aspect-ratio: 16 / 9;
 		height: auto;
 		margin: 1rem 0;
+		align-self: center;
 	}
 
 	@media only screen and (max-width: 800px) {
