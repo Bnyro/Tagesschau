@@ -1,5 +1,4 @@
 <script lang="ts">
-	import MediaQuery from '../components/MediaQuery.svelte';
 	import formatDate from '$lib/format';
 	import { goto } from '$app/navigation';
 
@@ -12,16 +11,7 @@
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <article on:click={onArticleClick}>
-	<MediaQuery query="only screen and (max-width: 800px)" let:matches>
-		{#if matches}
-			<img
-				src={article.teaserImage?.imageVariants['16x9-640']}
-				alt={article.teaserImage?.alttext}
-			/>
-		{:else}
-			<img src={article.teaserImage?.imageVariants['1x1-144']} alt={article.teaserImage?.alttext} />
-		{/if}
-	</MediaQuery>
+	<img src={article.teaserImage?.imageVariants['16x9-640']} alt={article.teaserImage?.alttext} />
 	<div>
 		<span class="topline">
 			<h5>{article.topline ?? ''}</h5>
@@ -42,10 +32,10 @@
 		background-color: var(--highlight);
 		display: flex;
 		align-items: center;
+		gap: 1.5rem;
 	}
 
 	article img {
-		margin-right: 1.5rem;
 		border-radius: 1rem;
 		height: 7.5rem;
 		width: auto;
@@ -88,10 +78,7 @@
 		article img {
 			max-width: 100%;
 			height: auto;
-		}
-
-		article div {
-			padding-top: 1.5rem;
+			margin: 0;
 		}
 	}
 </style>

@@ -3,7 +3,7 @@
 	import { onMount } from 'svelte';
 	import Article from '../components/Article.svelte';
 	import { page } from '$app/stores';
-	import { goto, invalidateAll } from '$app/navigation';
+	import { goto } from '$app/navigation';
 
 	let news: any[] = [];
 	let homepage: any[] = [];
@@ -137,7 +137,8 @@
 		display: flex;
 		flex-direction: column;
 		width: 100vw;
-		max-width: 70%;
+		max-width: 1400px;
+		padding: 0.6rem 1.2rem;
 		margin: 0 auto;
 	}
 
