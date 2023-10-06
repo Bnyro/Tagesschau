@@ -67,7 +67,6 @@
 
 	@media only screen and (max-width: 800px) {
 		article {
-			width: 90%;
 			flex-direction: column;
 		}
 
